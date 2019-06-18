@@ -1,12 +1,12 @@
 {
   "name": "node-spotify-youtube-downloader",
-  "version": "0.9",
+  "version": "0.9.0",
   "description": "Download songs from youtube then add tags with spotify web API",
   "homepage": "https://github.com/Douile/node-spotify-youtube-downloader#readme",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "main": "node index.js",
+    "start": "node index.js"
   },
   "keywords": ["music"],
   "author": "Douile",
