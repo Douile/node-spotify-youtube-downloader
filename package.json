@@ -1,18 +1,21 @@
 {
-  "name": "spot-downloader",
-  "version": "1.0.0",
-  "description": "",
+  "name": "node-spotify-youtube-downloader",
+  "version": "0.9",
+  "description": "Download songs from youtube then add tags with spotify web API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "main": "node index.js",
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["music"],
+  "author": "Douile",
+  "license": "Apache-2.0",
   "dependencies": {
-    "ffmetadata": "^1.5.0",
+    "async": "^3.0.1",
     "fluent-ffmpeg": "^2.1.2",
-    "node-spotify-api": "^1.1.1",
+    "minimist": "^1.2.0",
+    "node-fetch": "^2.6.0",
+    "node-id3": "^0.1.7",
     "ytdl-core": "^0.29.2"
   }
 }
