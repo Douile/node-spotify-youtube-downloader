@@ -12,7 +12,7 @@ A spotify web API token is needed, you can generate one in the [Web API Console]
 
 _Install_
 ```bash
-npm install --save node-youtube-downloader
+npm install --save node-spotify-youtube-downloader
 ```
 
 _Import_
