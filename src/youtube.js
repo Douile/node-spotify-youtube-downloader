@@ -23,7 +23,7 @@ var abuseKey = null;
 
 function searchYoutubeVideo(key, token, query) {
   return new Promise((resolve,reject) => {
-    fetch(URL_YT_SEARCH(key, query),{ headers: { /*'Authorization': `Bearer ${token}`,*/ 'Accept': 'application/json' }}).then((res) => {
+    fetch(URL_YT_SEARCH(key, query),{ headers: { 'Accept': 'application/json' }}).then((res) => {
       res.json().then((json) => {
         if (json['items'] === undefined) return reject(`Bad search response ${JSON.stringify(json)}`);
         if (json.items.length > 0) {

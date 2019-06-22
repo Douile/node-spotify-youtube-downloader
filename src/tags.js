@@ -52,7 +52,7 @@ function writeMetadata(filePath, trackInfo, albumArt) {
 
     nodeid3.update(tags, filePath, function(err,buffer) {
       if (err) reject(err);
-      else resolve();
+      else resolve(buffer);
     })
   });
 }

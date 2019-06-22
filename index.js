@@ -6,31 +6,34 @@ const { download, tag } = require('./src/main.js');
 const parseArgs = require('minimist');
 const readline = require('readline');
 
-var args = parseArgs(process.argv.slice(2), {
-  string: ['output','uri','token'],
-  alias: {
-    'o': 'output',
-    'u': 'uri',
-    't': 'token',
-    'v': 'version',
-    'u': 'usage',
-    'h': 'help'
-  }
-});
+if (!module.parent) {
+  var args = parseArgs(process.argv.slice(2), {
+    string: ['output','uri','token'],
+    alias: {
+      'o': 'output',
+      'u': 'uri',
+      't': 'token',
+      'v': 'version',
+      'u': 'usage',
+      'h': 'help'
+    }
+  });
 
-if (args.version) {
-  console.log(`${name} v${version}`);
-} else if(args.usage) {
-  console.log(`${name} usage:`);
-  console.log(`Download - ${processName()} -o <outputdir> -u <uri> -t <token>`);
-  console.log(`Help - ${processName()} -h`);
-  console.log(`Usage - ${processName()} -u`);
-  console.log(`Version - ${processName()} -v`);
-} else if (args.help) {
-  console.log(`${name} help:`);
-} else {
-  main(args);
+  if (args.version) {
+    console.log(`${name} v${version}`);
+  } else if(args.usage) {
+    console.log(`${name} usage:`);
+    console.log(`Download - ${processName()} -o <outputdir> -u <uri> -t <token>`);
+    console.log(`Help - ${processName()} -h`);
+    console.log(`Usage - ${processName()} -u`);
+    console.log(`Version - ${processName()} -v`);
+  } else if (args.help) {
+    console.log(`${name} help:`);
+  } else {
+    main(args);
+  }
 }
+
 
 function processName() {
   let n = process.argv[1],
