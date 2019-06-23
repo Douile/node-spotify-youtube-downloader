@@ -25,7 +25,7 @@ function download(videoId, outputPath) {
   if (outputPath === undefined || outputPath === null) {
     return downloadBuffer(videoId);
   } else {
-    return downloadFile(videoId);
+    return downloadFile(videoId, outputPath);
   }
 }
 
@@ -33,7 +33,7 @@ function downloadBuffer(videoId) {
   return new Promise((resolve,reject) => {
     try {
       let url = URL_VIDEO(videoId);
-      console.log(`Download start ${url}`);
+      console.log(`Download start (buffer) ${url}`);
       const stream = ytdl(url, { quality: 'highestaudio' });
       const outputStream = new BufferWritable({ estimatedSize: stream.readableHighWaterMark });
       var downloaded = 0, size;
@@ -83,7 +83,7 @@ function downloadFile(videoId, outputPath) {
       stream.on('end', () => {
         resolve(outputPath);
       });
-
+      
       ffmpeg(stream).audioBitrate(192).save(outputPath);
     } catch(e) {
       reject(e);

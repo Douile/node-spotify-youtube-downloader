@@ -24,20 +24,19 @@ function download({ spotifyToken, spotifyURI, downloadPath, range}) {
       if (range !== undefined) tracks = reduceTracks(range);
       tracks = normalizeTracks(tracks,downloadPath);
       logTracks(tracks);
-      concurrentAsync(tracks,1,asyncDownloadTrack(downloadPath),console.log).then(resolve).catch(reject);
+      concurrentAsync(tracks,5,asyncDownloadTrack(downloadPath),console.log).then(resolve).catch(reject);
     }).catch(reject);
   });
 }
 
 function resetTags({ spotifyToken, spotifyURI, downloadPath, range }) {
-  downloadPath = null;
   return new Promise((resolve,reject) => {
     console.log('Tagging your tracks...');
     lookup(spotifyToken, spotifyURI).then((tracks) => {
       if (range !== undefined) tracks = reduceTracks(range);
       tracks = normalizeTracks(tracks,downloadPath);
       logTracks(tracks);
-      concurrentAsync(tracks,1,promiseTagTrack,console.log).then(resolve).catch(reject);
+      concurrentAsync(tracks,5,promiseTagTrack,console.log).then(resolve).catch(reject);
     }).catch(reject);
   })
 }
