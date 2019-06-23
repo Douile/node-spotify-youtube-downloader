@@ -2,7 +2,7 @@
 
 const name = 'Node Spotify Downloader';
 const { version } = require('./package.json');
-const { download, tag } = require('./src/main.js');
+const { downloadTracks, tagTracks } = require('./src/index.js');
 const parseArgs = require('minimist');
 const readline = require('readline');
 
@@ -11,11 +11,11 @@ if (!module.parent) {
     string: ['output','uri','token'],
     alias: {
       'o': 'output',
-      'u': 'uri',
+      's': 'uri',
       't': 'token',
       'v': 'version',
       'u': 'usage',
-      'h': 'help'
+      'h': 'help',
     }
   });
 
@@ -43,18 +43,25 @@ function processName() {
   return n.substr(s);
 }
 
-async function main({ output, uri, token }) {
+async function main({ output, uri, token, tag }) {
   let rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   if (output === undefined) output = await read(rl, 'Enter output directory: ');
   if (uri === undefined) uri = await read(rl, 'Enter Spotify URI: ');
   if (token === undefined) token = await read(rl, 'Enter Spotify Token: ');
   rl.close();
-  await download({
-    spotifyURI: uri,
-    downloadPath: output,
-    spotifyToken: token
-  })
-  console.log('Download(s) done...');
+  let method = tag ? tagTracks : downloadTracks;
+  try {
+    let res = await method({
+      spotifyURI: uri,
+      downloadPath: output,
+      spotifyToken: token
+    });
+    console.log(res);
+  } catch(e) {
+    console.error(e);
+  }
+  console.log('Download(s) finished...');
+
 }
 
 function read(rl, question) {
@@ -86,6 +93,6 @@ function read(rl, question) {
 // }).catch(console.error);
 
 module.exports = {
-  download: download,
-  tag: tag
+  download: downloadTracks,
+  tag: tagTracks
 }

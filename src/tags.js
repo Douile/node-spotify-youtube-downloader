@@ -50,7 +50,9 @@ function writeMetadata(filePath, trackInfo, albumArt) {
       }
     }
 
-    nodeid3.update(tags, filePath, function(err,buffer) {
+    console.log(`Tagging ${trackInfo.track_name} ${albumArt ? 'with art' : 'without art'}`);
+
+    nodeid3.write(tags, filePath, (err,buffer) => {
       if (err) reject(err);
       else resolve(buffer);
     })

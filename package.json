@@ -8,11 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "keywords": ["music"],
+  "keywords": [
+    "music"
+  ],
   "author": "Douile",
   "license": "Apache-2.0",
   "dependencies": {
-    "async": "^3.0.1",
     "fluent-ffmpeg": "^2.1.2",
     "minimist": "^1.2.0",
     "node-fetch": "^2.6.0",

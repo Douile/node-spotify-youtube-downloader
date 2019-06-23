@@ -7,15 +7,19 @@ const API_ALBUM_TRACKS = function(id) {return { method: 'GET', url: `${API_BASE}
 const API_PLAYLIST = function(id) {return { method: 'GET', url: `${API_BASE}playlists/${encodeURI(id)}/tracks?limit=100&fields=items(track(name,track_number,disc_number,artists,album(name,images,total_tracks))),next` }};
 
 function parseURI(spotifyURI) {
-  let parts = spotifyURI.split(':');
-  if (parts.length === 3) {
-    if (parts[0] === 'spotify') {
-      return {
-        provider: parts[0],
-        type: parts[1],
-        id: parts[2]
-      };
+  try {
+    let parts = spotifyURI.split(':');
+    if (parts.length === 3) {
+      if (parts[0] === 'spotify') {
+        return {
+          provider: parts[0],
+          type: parts[1],
+          id: parts[2]
+        };
+      }
     }
+  } catch(e) {
+    throw new Error('Error parsing Spotify URI');
   }
   return null;
 }
@@ -85,7 +89,7 @@ function lookupAlbum(apiInfo, apiTracks, token) {
       res.json().then((json) => {
         const albumName = json.name;
         const albumLength = json.total_tracks;
-        const albumImage = json.images.length > 0 ? json.images[0].url : null
+        const albumImage = json.images ? (json.images.length > 0 ? json.images[0].url : null) : null;
         fetch(apiTracks.url,{ method: apiTracks.method, headers: { 'Authorization': `Bearer ${token}` } }).then((res) => {
           res.json().then((json) => {
             if (json.items === undefined) return reject(`Spotify response error ${JSON.stringify(json)}`);
