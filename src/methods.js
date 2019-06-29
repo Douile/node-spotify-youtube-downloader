@@ -32,7 +32,7 @@ const _METHODS = {
         }, undefined).then(resolve).catch(reject);
       }).catch(reject);
     })
-  }
+  },
   /* Tag method */
   1: function(downloader) {
     return new Promise((resolve,reject) => {

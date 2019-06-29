@@ -48,7 +48,7 @@ function normalizeTracks(tracks,downloadPath) {
 
 module.exports = {
   escapeFileName: escapeFileName,
-  concurrentAsync: concurrentAsync
+  concurrentAsync: concurrentAsync,
   timeout: timeout,
   normalizeTracks: normalizeTracks
 }
