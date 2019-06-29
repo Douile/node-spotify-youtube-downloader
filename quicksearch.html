@@ -1,0 +1,31 @@
+<html>
+<head>
+</head>
+<body style="background: transparent;">
+    <script src="scripts/docstrap.lib.js"></script>
+    <script src="scripts/lunr.min.js"></script>
+    <script src="scripts/fulltext-search.js"></script>
+
+    <script type="text/x-docstrap-searchdb">
+    {"Downloader.js.html":{"id":"Downloader.js.html","title":"Source: Downloader.js","body":" Spotify-Youtube downloader Source: Downloader.js const { METHODS, _METHODS } = require('./methods.js'); class Downloader { constructor({ output, spotifyURI, spotifyToken, threads, method }) { this._output = output ? output : null; this._spotifyURI = spotifyURI ? spotifyURI : null; this._spotifyToken = spotifyToken ? spotifyToken : null; this.threads(threads); this.method(method); } /** * Set the Output path * @param {?string} outputPath - Set folder path of output, or use null to recieve buffers in output */ output(outputPath) { this._output = outputPath; return this; } /** * Set the spotify URI of item to download * @param {string} uri - URI of item to download must be in format \"spotify:type:id\" */ spotifyURI(uri) { this._spotifyURI = uri; return this; } /** * Set your spotify web API token * @param {string} token - Spotify web API token */ spotifyToken(token) { this._spotifyToken = token; return this; } /** * Set number of concurrent downloads * @param {number} count - Number of threads to concurrently be used */ threads(count) { let nThreads = parseInt(count); this._threads = isNaN(nThreads) ? 5 : nThreads; return this; } /** * Set start method * @param {METHODS} method - Method to use */ method(method) { this._method = (method in METHODS) ? method : METHODS.DOWNLOAD; return this; } serialize() { return { output: this._output, spotifyURI: this._spotifyURI, spotifyToken: this._spotifyToken, threads: this._threads, }; } /** * Start the set method * @returns {Promise} Promise that resolves all tracks when they have finished */ start() { return _METHODS[this._method](this.serialize()); } } module.exports = { Downloader: Downloader, METHODS: METHODS }; × Search results Close Created by [Douile](https://github.com/Douile/) "},"index.html":{"id":"index.html","title":"Index","body":" Spotify-Youtube downloader node-spotify-youtube-downloader Download playlists or albums from spotify via youtube, then automatically add id3 tags using data from spotify web API. About CLI not yet ready A spotify web API token is needed, you can generate one in the Web API Console Apache 2.0 license Usage Install npm install --save node-spotify-youtube-downloader Import const { download, tag } = require('node-spotify-youtube-downloader'); download(...); tag(...) // OR const downloader = require('node-spotify-youtube-downloader'); downloader.download(...); downloader.tag(...); Download /* Download and tag songs */ download({ /* URI of item to download * Can be retrieved in spotify using right click -&gt; share -&gt; Copy Spotify URI * ATM only playlist and album are supported */ spotifyURI: 'spotify:album:50Zz8CkIhATKUlQMbHO3k1', /* Path to download files Make sure this folder exists otherwise program will error */ downloadPath: '../download/', /* Spotify web API Token */ spotifyToken: 'YOUR_TOKEN_HERE', /* Range of items to download (1-n) as an array Setting to undefined or omitting will cause all tracks to be used */ range: [2,4] }).then(() =&gt; {console.log('Download complete')}).catch(console.error); Tag /* Search for songs as they would be named by program and add the id3 tags from spotify Options have same syntax as download */ tag({ spotifyURI: 'spotify:album:50Zz8CkIhATKUlQMbHO3k1', downloadPath: '../download/', spotifyToken: 'YOUR_TOKEN_HERE', range: [2,4] }).then(() =&gt; {console.log('Tagging complete')}).catch(console.error); TODO [ ] Add CLI [ ] Improve logging (download progress etc) [ ] Improve API × Search results Close Created by [Douile](https://github.com/Douile/) "}}
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Searcher.init();
+        });
+
+        $(window).on("message", function(msg) {
+            var msgData = msg.originalEvent.data;
+
+            if (msgData.msgid != "docstrap.quicksearch.start") {
+                return;
+            }
+
+            var results = Searcher.search(msgData.searchTerms);
+
+            window.parent.postMessage({"results": results, "msgid": "docstrap.quicksearch.done"}, "*");
+        });
+    </script>
+</body>
+</html>

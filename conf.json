@@ -1,0 +1,19 @@
+{
+  "templates": {
+  	"systemName"            : "Spotify-Youtube downloader",
+  	"footer"                : "Created by [Douile](https://github.com/Douile/)",
+  	"copyright"             :  "Douile 2019",
+  	"includeDate"           : false,
+  	"navType"               : "vertical",
+  	"theme"                 : "yeti",
+  	"linenums"              : true,
+  	"collapseSymbols"       : true,
+  	"inverseNav"            : false,
+  	"outputSourceFiles"     : true ,
+  	"outputSourcePath"      : true,
+  	"dateFormat"            : "D.MMM.YYYY HH:mm:ss",
+  	"syntaxTheme"           : "dark",
+  	"sort"					: true,
+  	"search"                : true
+  }
+}
