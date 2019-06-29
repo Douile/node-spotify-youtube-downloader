@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Spotify-Youtube downloader Source: Downloader.js</title>
+	<title>Spotify-Youtube downloader Classes</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -60,95 +60,100 @@
 <div class="row">
 
 	
-	<div class="col-md-12">
+	<div class="col-md-8">
 	
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: Downloader.js</h1>
-    
+	<h1 class="page-title">Classes</h1>
 <section>
-    <article>
-        <pre
-            class="sunlight-highlight-javascript linenums">const { METHODS, _METHODS } = require('./methods.js');
 
-/**
-* Download builder class
-*/
-class Downloader {
-  constructor({ output, spotifyURI, spotifyToken, threads, method }) {
-    this._output = output ? output : null;
-    this._spotifyURI = spotifyURI ? spotifyURI : null;
-    this._spotifyToken = spotifyToken ? spotifyToken : null;
-    this.threads(threads);
-    this.method(method);
-  }
-  /**
-  * Set the Output path
-  * @param {?string} outputPath - Set folder path of output, or use null to recieve buffers in output
-  */
-  output(outputPath) {
-    this._output = outputPath;
-    return this;
-  }
-  /**
-  * Set the spotify URI of item to download
-  * @param {string} uri - URI of item to download must be in format "spotify:type:id"
-  */
-  spotifyURI(uri) {
-    this._spotifyURI = uri;
-    return this;
-  }
-  /**
-  * Set your spotify web API token
-  * @param {string} token - Spotify web API token
-  */
-  spotifyToken(token) {
-    this._spotifyToken = token;
-    return this;
-  }
-  /**
-  * Set number of concurrent downloads
-  * @param {number} count - Number of threads to concurrently be used
-  */
-  threads(count) {
-    let nThreads = parseInt(count);
-    this._threads = isNaN(nThreads) ? 5 : nThreads;
-    return this;
-  }
-  /**
-  * Set start method
-  * @param {METHODS} method - Method to use
-  */
-  method(method) {
-    this._method = (method in METHODS) ? method : METHODS.DOWNLOAD;
-    return this;
-  }
-  serialize() {
-    return {
-      output: this._output,
-      spotifyURI: this._spotifyURI,
-      spotifyToken: this._spotifyToken,
-      threads: this._threads,
-    };
-  }
-  /**
-  * Start the set method
-  * @returns {Promise} Promise that resolves all tracks when they have finished
-  */
-  start() {
-    return _METHODS[this._method](this.serialize());
-  }
-}
+<header>
+    
+        <h2>
+        
+        </h2>
+        
+    
+</header>
 
-module.exports = {
-  Downloader: Downloader,
-  METHODS: METHODS
-};
-</pre>
-    </article>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="Downloader.html">Downloader</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -158,6 +163,10 @@ module.exports = {
 
 	<div class="clearfix"></div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
 	
 
 </div>
