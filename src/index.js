@@ -5,6 +5,7 @@ const { searchYoutubeVideoNative } = require('./youtube.js');
 const { downloadVideo } = require('./download.js');
 const { metadata } = require('./tags.js');
 const { escapeFileName, concurrentAsync } = require('./util.js');
+const { Downloader, METHODS } = require('./Downloader.js');
 
 function logTracks(tracks) {
   let text = 'Tracks:';
@@ -98,23 +99,10 @@ function reduceTracks(tracks,range) {
   return reducedTracks;
 }
 
-function normalizeTracks(tracks,downloadPath) {
-  let normailized = [];
-  for (let track of tracks) {
-    track.name = `${track.artist} - ${track.track_name}`;
-    track.path = downloadPath === null ? null : `${downloadPath}/${escapeFileName(track.name)}.mp3`;
-    normailized.push(track);
-  }
-  return normailized;
-}
-
-function timeout(time) {
-  return new Promise((resolve,reject) => {
-    setTimeout(resolve,time);
-  })
-}
 
 module.exports = {
   downloadTracks: download,
-  tagTracks: resetTags
+  tagTracks: resetTags,
+  Downloader: Downloader,
+  METHODS: METHODS
 }

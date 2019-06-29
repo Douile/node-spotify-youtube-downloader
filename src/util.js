@@ -36,7 +36,19 @@ function timeout(time) {
   })
 }
 
+function normalizeTracks(tracks,downloadPath) {
+  let normailized = [];
+  for (let track of tracks) {
+    track.name = `${track.artist} - ${track.track_name}`;
+    track.path = downloadPath === null ? null : `${downloadPath}/${escapeFileName(track.name)}.mp3`;
+    normailized.push(track);
+  }
+  return normailized;
+}
+
 module.exports = {
   escapeFileName: escapeFileName,
   concurrentAsync: concurrentAsync
+  timeout: timeout,
+  normalizeTracks: normalizeTracks
 }
