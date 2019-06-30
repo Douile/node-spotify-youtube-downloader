@@ -41,7 +41,7 @@ const _METHODS = {
   }
 }
 
-modules.exports = {
+module.exports = {
   METHODS: METHODS,
   _METHODS: _METHODS
 };

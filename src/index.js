@@ -4,7 +4,7 @@ const { lookup } = require('./spotify.js');
 const { searchYoutubeVideoNative } = require('./youtube.js');
 const { downloadVideo } = require('./download.js');
 const { metadata } = require('./tags.js');
-const { escapeFileName, concurrentAsync } = require('./util.js');
+const { escapeFileName, concurrentAsync, normalizeTracks } = require('./util.js');
 const { Downloader, METHODS } = require('./Downloader.js');
 
 function logTracks(tracks) {
