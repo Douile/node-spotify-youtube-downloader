@@ -1,3 +1,15 @@
+# Node
 node_modules/
 package-lock.json
+
+# Scripts
 *.bat
+*.sh
+
+# Editor files
+*~
+
+# Repo specific
+src/*
+index.js
+
