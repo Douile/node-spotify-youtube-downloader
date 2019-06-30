@@ -10,6 +10,6 @@ package-lock.json
 *~
 
 # Repo specific
-src/*
+src/
 index.js
 
