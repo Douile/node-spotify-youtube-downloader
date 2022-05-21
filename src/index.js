@@ -6,6 +6,7 @@ const { downloadVideo } = require('./download.js');
 const { metadata } = require('./tags.js');
 const { escapeFileName, concurrentAsync, normalizeTracks } = require('./util.js');
 const { Downloader, METHODS } = require('./Downloader.js');
+const { writePlaylistFile } = require('./playlist.js');
 
 function logTracks(tracks) {
   let text = 'Tracks:';
@@ -36,8 +37,12 @@ function resetTags({ spotifyToken, spotifyURI, downloadPath, range }) {
     lookup(spotifyToken, spotifyURI).then((tracks) => {
       if (range !== undefined) tracks = reduceTracks(range);
       tracks = normalizeTracks(tracks,downloadPath);
-      logTracks(tracks);
-      concurrentAsync(tracks,5,promiseTagTrack,console.log).then(resolve).catch(reject);
+      // logTracks(tracks);
+      concurrentAsync(tracks,5,promiseTagTrack,undefined).then(resolve).catch(reject);
+      if (tracks._isPlaylist || true) {
+        console.log('Writing playlist file');
+        writePlaylistFile(tracks, 'Test', path.join(downloadPath,`test.m3u8`));
+      }
     }).catch(reject);
   })
 }

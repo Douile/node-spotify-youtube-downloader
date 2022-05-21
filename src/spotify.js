@@ -5,6 +5,7 @@ const API_TRACK = function(id) {return { method: 'GET', url: `${API_BASE}tracks/
 const API_ALBUM = function(id) {return { method: 'GET', url: `${API_BASE}albums/${encodeURI(id)}`}};
 const API_ALBUM_TRACKS = function(id) {return { method: 'GET', url: `${API_BASE}albums/${encodeURI(id)}/tracks` }};
 const API_PLAYLIST = function(id) {return { method: 'GET', url: `${API_BASE}playlists/${encodeURI(id)}/tracks?limit=100&fields=items(track(name,track_number,disc_number,artists,album(name,images,total_tracks))),next` }};
+const API_PLAYLIST_INFO = function(id) {return { method: 'GET', url: `${API_BASE}playlists/${encodeURI(id)}?fiels=name`}}
 
 function parseURI(spotifyURI) {
   try {
@@ -73,9 +74,11 @@ function lookupPlaylist(api,token) {
             for (let track of nextTracks) {
               tracksFinal.push(track);
             }
+            tracksFinal._isPlaylist = true;
             resolve(tracksFinal);
           }).catch(reject);
         } else {
+          tracks._isPlaylist = true;
           resolve(tracks);
         }
       }).catch(reject);

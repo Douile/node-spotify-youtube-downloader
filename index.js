@@ -16,6 +16,7 @@ if (!module.parent) {
       'v': 'version',
       'u': 'usage',
       'h': 'help',
+      'n': 'tag'
     }
   });
 
@@ -30,6 +31,9 @@ if (!module.parent) {
   } else if (args.help) {
     console.log(`${name} help:`);
   } else {
+    process.on('uncaughtException', (err, origin) => {
+      console.error(`Caught exception: ${err}\nException origin: ${origin}`);
+    })
     main(args);
   }
 }
@@ -56,7 +60,7 @@ async function main({ output, uri, token, tag }) {
       downloadPath: output,
       spotifyToken: token
     });
-    console.log(res);
+    // console.log(res);
   } catch(e) {
     console.error(e);
   }

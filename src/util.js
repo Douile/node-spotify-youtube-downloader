@@ -12,18 +12,18 @@ function concurrentAsync(collection, threads, iteree, onEachFinish) {
         const index = i;
         i++;
         let input = collection[index];
-        const promise = iteree(input);
+        const promise = iteree(input, index);
         active.push(promise);
         let onComplete = (result) => {
           active.splice(active.indexOf(promise));
           data[index] = result;
           if (onEachFinish !== undefined) onEachFinish(result);
           done++;
-          console.log(`Finished ${index}`);
+          console.log(`Finished ${done}/${collection.length}`);
           if (done >= collection.length) resolve(data);
         }
         promise.then(onComplete).catch(onComplete);
-        console.log(`Started ${index}`);
+        // console.log(`Started ${index}`);
       }
       await timeout(2);
     }
@@ -40,7 +40,8 @@ function normalizeTracks(tracks,downloadPath) {
   let normailized = [];
   for (let track of tracks) {
     track.name = `${track.artist} - ${track.track_name}`;
-    track.path = downloadPath === null ? null : `${downloadPath}/${escapeFileName(track.name)}.mp3`;
+    track.fileName = `${escapeFileName(track.name)}.mp3`;
+    track.path = downloadPath === null ? null : `${downloadPath}/${track.fileName}`;
     normailized.push(track);
   }
   return normailized;
